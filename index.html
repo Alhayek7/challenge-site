@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- ✏️ عنوان الصفحة ووصفها (يظهران في جوجل ومعاينة الروابط) -->
+<title>تحدي الـ 30 يومًا | صناع الأثر الرقمي</title>
+<meta name="description" content="30 يومًا × 30 فيديو ريلز × 30 فكرة مبتكرة بأثر حقيقي. تابع ترتيبك وتقدّمك في التحدي.">
+<meta name="theme-color" content="#0a2463">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<!-- معاينة الرابط عند مشاركته. ✏️ بعد النشر استبدل الرابط التالي برابط موقعك الكامل (انظر README) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="تحدي الـ 30 يومًا | صناع الأثر الرقمي">
+<meta property="og:description" content="30 يومًا × 30 فيديو ريلز × 30 فكرة مبتكرة بأثر حقيقي.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="demoBar" class="demo-bar hide">وضع المعاينة: بيانات تجريبية. اربط Supabase من ملف assets/js/config.js لعرض البيانات الحقيقية.</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="mq-mask mq-nav" role="img" aria-label="مؤسسة المرقاة"></span><i class="vsep"></i><span class="logo-mask"></span><span>صناع الأثر الرقمي<small>تحدي الـ 30 يومًا</small></span></a>
+    <nav class="nav-links" id="links">
+      <a href="#community">المجتمع</a><a href="#board">الترتيب</a><a href="#prizes">الجوائز</a><a href="#how">كيف أشارك؟</a><a href="#badges">الشارات</a><a href="#faq">الأسئلة</a><a href="register.html">التسجيل</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="القائمة">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="orb" style="width:70px;height:70px;top:30px;right:46%;animation-delay:-2s"></div>
+  <div class="orb gold" style="width:38px;height:38px;bottom:40px;right:52%;animation-delay:-4s"></div>
+  <div class="ring" style="width:90px;height:90px;top:60px;left:3%"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="mq-mask mq-eb"></span> مبادرة <span id="orgName">مؤسسة المرقاة</span></span>
+      <span class="pill"><i></i><span id="statePill">جارٍ التحميل…</span></span>
+      <!-- ✏️ العنوان الرئيسي (الرقم يتغير تلقائيًا من إعدادات الإدارة) -->
+      <h1>اصنع أثرك <span>الرقمي</span><br>في <span id="heroDays">30</span> يومًا</h1>
+      <div class="formula"><span>30 يومًا</span><i>×</i><span>30 ريلز</span><i>×</i><span>30 فكرة</span></div>
+      <p class="lead" id="heroLead"></p>
+      <!-- ✏️ شارتان توضحان أن التحدي مفتوح للجميع -->
+      <div class="chips"><span class="chip">🌍 مفتوح للجميع من كل مكان</span><span class="chip gold">🎓 أعضاء البرنامج يتنافسون على الجوائز</span></div>
+      <div class="cta">
+        <a class="btn gold" href="register.html">🚀 سجّل في التحدي</a>
+        <button class="btn" id="openSubmit">🎬 أرسل ريلز اليوم</button>
+        <a class="btn ghost" id="igLink" href="#" target="_blank" rel="noopener">حساب المنصة</a>
+      </div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="stage" id="stage">
+        <div class="floor"></div>
+        <div class="ring3d"></div><div class="ring3d r2"></div>
+        <div class="orb" style="width:84px;height:84px;top:6%;right:4%;--d:30"></div>
+        <div class="orb gold" style="width:44px;height:44px;bottom:12%;left:6%;--d:50;animation-delay:-3s"></div>
+        <div class="orb" style="width:30px;height:30px;top:48%;left:-2%;--d:20;animation-delay:-5s"></div>
+        <div class="logo-card tilt" style="--d:12"><span class="logo-mask logo-white"></span></div>
+        <div class="chip3d a" style="--d:44">🎬 <b id="chipReels">0</b> ريلز</div>
+        <div class="chip3d b" style="--d:36">👥 <b id="chipPeople">0</b> مشارك</div>
+        <div class="chip3d c" style="--d:52">🏆 <b id="chipPrize">100$</b></div>
+        <div class="disc" style="--d:40">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#e2e9f6" stroke-width="8"/><circle id="ringArc" cx="50" cy="50" r="44" fill="none" stroke="url(#rg)" stroke-width="8" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46" transform="rotate(-90 50 50)" style="transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)"/>
+            <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fb0ff"/><stop offset="1" stop-color="#0a2463"/></linearGradient></defs></svg>
+          <div class="t"><small>اليوم</small><b id="discNum">–</b><span id="discSub"></span></div>
+        </div>
+        <div class="mq-card" style="--d:24"><span class="mq-mask"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker hide" id="tickerBox" aria-label="آخر الأخبار"><div class="ticker-in" id="ticker"></div></div>
+
+<section class="sec">
+  <div class="wrap stats" id="stats"></div>
+</section>
+
+<section class="sec hide" id="todaySec">
+  <div class="wrap">
+    <div class="card today">
+      <div class="today-h"><div><b>🎬 نشروا اليوم</b><small>اضغط على صورة لمشاهدة رحلة المشارك</small></div><span class="today-n" id="todayCount"></span></div>
+      <div class="today-av" id="todayAvatars"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="community">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🌍 مجتمع التحدي من كل مكان</h2><p>يشارك معنا أعضاء من داخل البرنامج وأصدقاء من خارجه. اضغط على دولة لتصفية الترتيب.</p></div></div>
+    <div class="card community">
+      <div class="split-bar" id="splitBar" role="img" aria-label="نسبة الأعضاء والمشاركين المفتوحين"></div>
+      <div class="split-leg" id="splitLeg"></div>
+      <div class="cchips" id="countryChips"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec hide" id="winnersSec">
+  <div class="wrap">
+    <div class="card winners">
+      <div class="w-h"><span class="w-ic">🎉</span><div><h2>الفائزون في التحدي</h2><p id="winSub"></p></div></div>
+      <div class="w-grid" id="winGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="podiumSec">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🏆 منصة التتويج</h2><p id="podiumSub">المتصدّرون الآن، والمنافسة مفتوحة حتى آخر يوم.</p></div></div>
+    <div class="podium" id="podium"></div>
+  </div>
+</section>
+
+<section class="sec" id="board">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>📊 لوحة الترتيب</h2><p>اضغط على أي مشارك لعرض رحلته يومًا بيوم.</p></div></div>
+    <div class="seg" id="scopeTabs" role="tablist" aria-label="نطاق الترتيب">
+      <button class="seg-b on" role="tab" aria-selected="true" data-scope="all">🌍 الترتيب العام للجميع</button>
+      <button class="seg-b" role="tab" aria-selected="false" data-scope="members">🎓 المنافسة على الجوائز</button>
+    </div>
+    <div class="note scope-note hide" id="scopeNote"></div>
+    <div class="tools">
+      <input class="input" id="q" placeholder="ابحث عن مشارك…" autocomplete="off" aria-label="بحث">
+      <select class="select" id="spec" aria-label="التخصص"><option value="">كل التخصصات</option></select>
+      <select class="select" id="ctry" aria-label="الدولة"><option value="">كل الدول</option></select>
+      <select class="select" id="sortF" aria-label="ترتيب العرض"><option value="rank">الترتيب العام</option><option value="streak">الأطول سلسلة 🔥</option><option value="today">أنجزوا اليوم</option><option value="new">الأحدث انضمامًا</option></select>
+    </div>
+    <div class="board" id="rows"></div>
+    <div class="more-row"><button class="btn ghost" id="moreBtn" type="button" hidden>عرض المزيد</button></div>
+  </div>
+</section>
+
+<section class="sec" id="progress">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>📈 تطور التحدي</h2><p>عدد الريلز المعتمدة في كل يوم.</p></div></div>
+    <div class="card chart"><div class="bars" id="bars"></div></div>
+  </div>
+</section>
+
+<section class="sec" id="prizes">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🎁 التكريم والتقدير</h2><p id="prizeSub"></p></div></div>
+    <div class="note" id="prizeScope" style="margin-bottom:16px"></div>
+    <div class="prizes">
+      <div class="card prize tilt"><div class="ic">💵</div><div><h3 id="prizeAmt">100$</h3><p>مكافأة مالية تشجيعية تُمنح لكل فائز.</p></div></div>
+      <!-- ✏️ اسم الجائزة الثانية (نصها التفصيلي من لوحة الإدارة > الإعدادات) -->
+      <div class="card prize b tilt"><div class="ic">🎥</div><div><h3>عضوية استوديو النقاء</h3><p id="prizeExtra"></p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="criteria">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🎯 كيف تضمن الفوز؟</h2><p>معايير التنافس في التحدي.</p></div></div>
+    <div class="crits" id="critBox"></div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🧭 كيف أشارك؟</h2><p>ثلاث خطوات بسيطة كل يوم.</p></div></div>
+    <div class="steps" id="stepsBox"></div>
+  </div>
+</section>
+
+<section class="sec" id="badges">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>🎖️ اجمع الشارات</h2><p>كل إنجاز يفتح لك شارة جديدة تظهر على بطاقتك.</p></div></div>
+    <div class="badge-legend" id="legend"></div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-h"><div><h2>❓ أسئلة شائعة</h2></div></div>
+    <div class="faqs" id="faqBox"></div>
+  </div>
+</section>
+
+<section class="sec" id="org">
+  <div class="wrap">
+    <div class="card org tilt">
+      <div class="org-logo"><span class="mq-mask"></span></div>
+      <div><small>برعاية وتنفيذ</small><h2 id="orgTitle">مؤسسة المرقاة للتعليم والتدريب</h2><p id="orgAbout"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="card cta-band">
+      <div><h2>جاهز لصناعة أثرك؟</h2><p>سجّل الآن وابدأ رحلة الـ 30 يومًا، وادعُ أصدقاءك ليشاركوك التحدي.</p></div>
+      <div class="cta">
+        <a class="btn gold" href="register.html">🚀 سجّل الآن</a>
+        <button class="btn ghost" data-share>📤 شارك التحدي</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot-logos"><span class="mq-mask"></span><i class="vsep"></i><span class="logo-mask"></span></div>
+  <div id="footOrg"></div>
+  <div style="font-weight:500;margin-top:4px;font-size:.85rem" id="footNote"></div>
+  <div style="margin-top:10px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-weight:800">
+    <a id="igFoot" href="#" target="_blank" rel="noopener" style="color:var(--blue)">إنستغرام</a>
+    <a href="register.html" style="color:var(--blue)">التسجيل</a>
+    <a href="#" data-share onclick="return false" style="color:var(--blue)">مشاركة</a>
+  </div>
+</footer>
+
+<a class="fab-wa hide" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">💬</a>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script>window.supabase||document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"><\/script>')</script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/cert.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

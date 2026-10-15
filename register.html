@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>التسجيل | تحدي الـ 30 يومًا</title>
+<meta name="description" content="سجّل في تحدي الـ 30 يومًا من برنامج صناع الأثر الرقمي. مفتوح للجميع من كل مكان.">
+<meta name="theme-color" content="#0a2463">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="mq-mask mq-nav" role="img" aria-label="مؤسسة المرقاة"></span><i class="vsep"></i><span class="logo-mask"></span><span>صناع الأثر الرقمي<small>تحدي الـ 30 يومًا</small></span></a>
+    <nav class="nav-links" style="display:flex"><a href="index.html">← الصفحة الرئيسية</a></nav>
+  </div>
+</header>
+
+<main class="wrap" style="position:relative">
+  <div class="orb" style="width:60px;height:60px;top:40px;left:2%"></div>
+  <div class="orb gold" style="width:34px;height:34px;top:200px;right:2%;animation-delay:-3s"></div>
+
+  <div class="card formcard" id="box">
+    <div style="text-align:center;margin-bottom:18px">
+      <span class="pill">🚀 انضم إلى التحدي</span>
+      <h1 style="color:var(--navy);font-weight:900;margin-top:10px;font-size:1.9rem">سجّل بياناتك</h1>
+      <p style="color:var(--mut)">التحدي مفتوح للجميع من كل مكان. بعد التسجيل تراجع الإدارة طلبك ثم يظهر اسمك في لوحة الترتيب.</p>
+    </div>
+    <div id="closed" class="note warn hide" style="margin-bottom:14px">التسجيل مغلق حاليًا.</div>
+    <div id="demo" class="note warn hide" style="margin-bottom:14px">وضع المعاينة: اربط Supabase من assets/js/config.js ليعمل التسجيل.</div>
+
+    <form class="form" id="form" novalidate>
+      <!-- ✏️ نوع المشاركة: النصوص قابلة للتعديل هنا -->
+      <fieldset class="kinds">
+        <legend>نوع المشاركة</legend>
+        <label class="kind">
+          <input type="radio" name="kind" value="member">
+          <span class="kind-body"><b>🎓 أنا عضو في البرنامج</b><small>لدي رقم عضوية من الإدارة، وأتنافس على الجوائز</small></span>
+        </label>
+        <label class="kind">
+          <input type="radio" name="kind" value="open" checked>
+          <span class="kind-body"><b>🌍 مشاركة مفتوحة</b><small>من داخل البرنامج أو خارجه، بدون رقم عضوية</small></span>
+        </label>
+      </fieldset>
+
+      <div class="field hide" id="codeField">
+        <label for="memberCode">رقم العضوية</label>
+        <input class="input code-in" id="memberCode" name="member_code" dir="ltr" maxlength="30" placeholder="SN-XXXX-XXXX" autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <small id="codeHint"></small>
+      </div>
+
+      <div class="photo-pick">
+        <span class="avatar" id="prev"><b>＋</b></span>
+        <div class="field" style="flex:1"><label for="photo">صورتك الشخصية</label>
+          <input class="input" type="file" id="photo" accept="image/*" required>
+          <small>صورة واضحة للوجه، تُضغط تلقائيًا.</small></div>
+      </div>
+      <div class="field"><label for="full_name">الاسم الكامل</label><input class="input" id="full_name" name="full_name" maxlength="80" placeholder="مثال: سارة أحمد" required autocomplete="name"></div>
+      <div class="field"><label for="instagram">حساب إنستغرام</label><input class="input" id="instagram" name="instagram" dir="ltr" maxlength="60" placeholder="username أو رابط الحساب" required autocomplete="off"></div>
+      <div class="two">
+        <div class="field"><label for="country">الدولة</label><select class="select" id="country" name="country" required></select></div>
+        <div class="field"><label for="city">المدينة <small>(اختياري)</small></label><input class="input" id="city" name="city" maxlength="60" placeholder="مثال: غزة" autocomplete="address-level2"></div>
+      </div>
+      <div class="field"><label for="specialty">التخصص الوظيفي</label><input class="input" id="specialty" name="specialty" maxlength="80" placeholder="مثال: مصمم جرافيك، مونتير، مبرمج…" required list="specs"></div>
+      <datalist id="specs"><option>مصمم جرافيك</option><option>مونتير</option><option>مصور</option><option>مبرمج</option><option>كاتب محتوى</option><option>مسوّق رقمي</option><option>طالب</option></datalist>
+
+      <!-- حقل مخفي لصيد الروبوتات: لا تحذفه -->
+      <div class="hp" aria-hidden="true"><label>الموقع <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <label class="switch" style="font-weight:600;color:var(--mut)"><input type="checkbox" id="agree" required> أتعهد بنشر ريلز يوميًا والالتزام بشروط التحدي، وأوافق على عرض اسمي وصورتي ودولتي في الموقع.</label>
+      <div id="err" class="note err hide" role="alert"></div>
+      <div id="errActions" class="hide"><button type="button" class="btn ghost sm" id="goOpen">سجّل كمشارك مفتوح بدلًا من ذلك</button></div>
+      <button class="btn gold" type="submit" id="go">إرسال طلب التسجيل</button>
+    </form>
+
+    <div class="success hide" id="ok" aria-live="polite">
+      <div class="big">🎉</div>
+      <h2 style="color:var(--navy);font-weight:900" id="okTitle">تم استلام طلبك!</h2>
+      <p style="color:var(--mut);margin:8px 0 14px" id="okText"></p>
+      <div id="okPhoto" class="note warn hide" style="margin-bottom:12px"></div>
+      <div class="cta" style="justify-content:center">
+        <a class="btn" href="index.html">العودة للرئيسية</a>
+        <a class="btn gold hide" id="groupBtn" href="#" target="_blank" rel="noopener">👥 انضم لمجموعة المشاركين</a>
+        <button class="btn ghost" type="button" data-share>📤 ادعُ أصدقاءك</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script>window.supabase||document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"><\/script>')</script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/register.js"></script>
+</body>
+</html>

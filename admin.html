@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>الإدارة | تحدي الـ 30 يومًا</title>
+<meta name="theme-color" content="#0a2463">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- تسجيل الدخول -->
+<div id="loginView" class="wrap">
+  <div class="card login">
+    <div class="foot-logos"><span class="mq-mask"></span><i class="vsep"></i><span class="logo-mask"></span></div>
+    <h1 style="color:var(--navy);font-weight:900;font-size:1.7rem">لوحة الإدارة</h1>
+    <p style="color:var(--mut);margin-bottom:18px">تحدي الـ 30 يومًا · صناع الأثر الرقمي</p>
+    <div id="cfgWarn" class="note warn hide" style="margin-bottom:14px;text-align:right">لم يتم ربط Supabase بعد. عدّل assets/js/config.js.</div>
+    <form class="form" id="loginForm" style="text-align:right">
+      <div class="field"><label for="lu">اسم المستخدم</label><input class="input" id="lu" name="u" dir="ltr" autocomplete="username" required></div>
+      <div class="field"><label for="lp">كلمة المرور</label>
+        <div class="pwd-eye"><input class="input" id="lp" name="p" type="password" dir="ltr" autocomplete="current-password" required><button type="button" id="eye" aria-label="إظهار كلمة المرور">👁</button></div></div>
+      <div id="loginErr" class="note err hide" role="alert"></div>
+      <button class="btn" type="submit">تسجيل الدخول</button>
+    </form>
+    <p style="margin-top:16px"><a href="index.html" style="color:var(--blue);font-weight:800">← الصفحة الرئيسية</a></p>
+  </div>
+</div>
+
+<!-- التطبيق -->
+<div id="appView" class="hide">
+  <header class="nav">
+    <div class="wrap">
+      <a href="index.html" class="brand"><span class="mq-mask mq-nav" role="img" aria-label="مؤسسة المرقاة"></span><i class="vsep"></i><span class="logo-mask"></span><span>إدارة التحدي<small id="whoami">صناع الأثر الرقمي</small></span></a>
+      <div style="margin-inline-start:auto;display:flex;gap:10px;align-items:center">
+        <button class="btn ghost sm" id="refresh" title="تحديث البيانات">↻ تحديث</button>
+        <a class="btn ghost sm" href="index.html" target="_blank" rel="noopener">عرض الموقع</a>
+        <button class="btn danger sm" id="logout">خروج</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top:20px">
+    <div class="stats" id="aStats" style="margin-bottom:18px"></div>
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="tab on" data-t="grid">📋 جدول المتابعة</button>
+      <button class="tab" data-t="today">📅 اليوم</button>
+      <button class="tab" data-t="requests">📥 الطلبات <span class="cnt hide" id="cnt"></span></button>
+      <button class="tab" data-t="people">👥 المشاركون</button>
+      <button class="tab" data-t="codes">🎟️ أكواد العضوية</button>
+      <button class="tab" data-t="winners">🏆 الفائزون</button>
+      <button class="tab" data-t="ann">📣 الإعلانات</button>
+      <button class="tab" data-t="settings">⚙️ الإعدادات</button>
+    </div>
+
+    <!-- جدول المتابعة -->
+    <section id="t-grid">
+      <div class="tools">
+        <input class="input" id="gq" placeholder="ابحث عن مشارك…">
+        <select class="select" id="gscope"><option value="">الكل</option><option value="m">أعضاء البرنامج فقط</option><option value="o">المشاركون المفتوحون فقط</option></select>
+        <select class="select" id="dayPick"></select>
+        <button class="btn green sm" id="markAll">✓ تحديد الكل لهذا اليوم</button>
+        <button class="btn ghost sm" id="csv">⬇ تصدير الترتيب CSV</button>
+      </div>
+      <p class="hintp">اضغط على الخلية لتسجيل الإنجاز أو إلغائه. الخلية الصفراء = ريلز مرسل من المشارك ينتظر اعتمادك (اضغط لاعتماده). اضغط على اسم المشارك لإضافة روابط وتعديل بياناته. 🎓 = عضو البرنامج.</p>
+      <div class="gridwrap" id="gridwrap"></div>
+    </section>
+
+    <!-- اليوم والتذكير -->
+    <section id="t-today" class="hide">
+      <div class="tools"><select class="select" id="todayDay"></select><span class="muted" id="todaySum"></span></div>
+      <div class="split">
+        <div class="card" style="padding:18px"><div class="colh"><span>⏳ لم ينشروا بعد <span class="tag" id="missN"></span></span></div><div class="list" id="missBox"></div></div>
+        <div class="card" style="padding:18px"><div class="colh"><span>✅ أنجزوا <span class="tag" id="doneN"></span></span></div><div class="list" id="doneBox"></div></div>
+      </div>
+      <div class="card" style="padding:18px;margin-top:18px">
+        <div class="colh"><span>💬 رسالة تذكير جاهزة</span><span class="muted" style="font-size:.85rem">تُصاغ من تبويب الإعدادات في config.js</span></div>
+        <textarea class="textarea" id="remindText" rows="7" aria-label="رسالة التذكير"></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn sm" id="copyRemind">📋 نسخ الرسالة</button>
+          <a class="btn green sm" id="waRemind" href="#" target="_blank" rel="noopener">فتح واتساب</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- الطلبات -->
+    <section id="t-requests" class="hide"><div id="reqBox"></div></section>
+
+    <!-- المشاركون -->
+    <section id="t-people" class="hide">
+      <div class="tools"><input class="input" id="pq" placeholder="ابحث…"><select class="select" id="pscope"><option value="">كل الحالات</option><option value="pending">قيد المراجعة</option><option value="approved">معتمد</option><option value="rejected">مرفوض</option></select><button class="btn sm" id="addP">＋ إضافة مشارك</button></div>
+      <div class="list" id="peopleBox"></div>
+    </section>
+
+    <!-- أكواد العضوية -->
+    <section id="t-codes" class="hide">
+      <div class="card" style="padding:20px;margin-bottom:16px">
+        <div class="colh"><span>🎟️ توليد أكواد عضوية جديدة</span></div>
+        <p class="hintp">كل عضو في البرنامج يستلم كودًا واحدًا يكتبه عند التسجيل، ولا يُستخدم الكود إلا مرة واحدة. الأكواد مخفية تمامًا عن الزوار.</p>
+        <form class="form" id="genForm">
+          <div class="two">
+            <div class="field"><label for="gPrefix">البادئة (حروف/أرقام إنجليزية)</label><input class="input" id="gPrefix" dir="ltr" value="SN" maxlength="6" required></div>
+            <div class="field"><label for="gCount">العدد</label><input class="input" id="gCount" type="number" min="1" max="300" value="10"></div>
+          </div>
+          <div class="field"><label for="gNames">أو الصق أسماء الأعضاء (اسم في كل سطر) ليُولَّد لكل واحد كود ويُسجَّل اسمه</label>
+            <textarea class="textarea" id="gNames" rows="4" placeholder="أحمد محمد&#10;سارة علي"></textarea><small>إن كتبت أسماء فسيُهمل حقل «العدد».</small></div>
+          <button class="btn" type="submit">توليد الأكواد</button>
+        </form>
+      </div>
+      <div class="tools">
+        <input class="input" id="cq" placeholder="ابحث بالكود أو الاسم…">
+        <select class="select" id="cfilter"><option value="">كل الأكواد</option><option value="free">المتاحة</option><option value="used">المستخدمة</option></select>
+        <button class="btn green sm" id="copyFree">📋 نسخ المتاحة للتوزيع</button>
+        <button class="btn ghost sm" id="csvCodes">⬇ تصدير CSV</button>
+      </div>
+      <div class="list" id="codesBox"></div>
+    </section>
+
+    <!-- الفائزون -->
+    <section id="t-winners" class="hide">
+      <div class="card" style="padding:22px;margin-bottom:16px">
+        <div class="colh"><span>🏆 الفائزون المتوقعون (أعضاء البرنامج فقط)</span><span class="tag" id="winState"></span></div>
+        <p class="hintp">القائمة تُحسب تلقائيًا من الترتيب (الأيام المنجزة ثم السلسلة). عند الضغط على «نشر الفائزين» يظهر قسم احتفالي على الصفحة الرئيسية. راجع الأعمال وأصالة الأفكار قبل النشر.</p>
+        <div class="list" id="winBox"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <button class="btn gold" id="winPublish">🎉 نشر الفائزين على الموقع</button>
+          <button class="btn ghost" id="winCopy">📋 نسخ نص التهنئة</button>
+          <button class="btn ghost" id="winCsv">⬇ تصدير CSV</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- الإعلانات -->
+    <section id="t-ann" class="hide">
+      <div class="card" style="padding:20px;margin-bottom:16px">
+        <div class="colh"><span>📣 إعلان جديد في شريط الأخبار</span></div>
+        <p class="hintp">تظهر الإعلانات في الشريط المتحرك أعلى الموقع. المثبّتة تأتي أولًا.</p>
+        <form class="form" id="annForm">
+          <div class="field"><label for="annBody">نص الإعلان (حتى 200 حرف)</label><input class="input" id="annBody" maxlength="200" required placeholder="مثال: لقاء مباشر الجمعة 8 مساءً مع الخبراء"></div>
+          <div class="two">
+            <div class="field"><label for="annLink">رابط اختياري (https)</label><input class="input" id="annLink" dir="ltr" placeholder="https://…"></div>
+            <div class="field"><label>&nbsp;</label><label class="switch"><input type="checkbox" id="annPin"> تثبيت في المقدمة</label></div>
+          </div>
+          <button class="btn" type="submit">نشر الإعلان</button>
+        </form>
+      </div>
+      <div id="annWarn" class="note warn hide" style="margin-bottom:12px">جدول الإعلانات غير موجود. أعد تشغيل ملف schema.sql المحدَّث في Supabase.</div>
+      <div class="list" id="annBox"></div>
+    </section>
+
+    <!-- الإعدادات -->
+    <section id="t-settings" class="hide">
+      <div class="card" style="padding:24px;max-width:720px">
+        <div class="colh"><span>⚙️ إعدادات التحدي</span></div>
+        <form class="form" id="setForm">
+          <div class="field"><label>عنوان التحدي</label><input class="input" name="title" maxlength="80" required></div>
+          <div class="two">
+            <div class="field"><label>تاريخ بداية التحدي (اليوم الأول)</label><input class="input" type="date" name="start_date"></div>
+            <div class="field"><label>عدد الأيام</label><input class="input" type="number" name="total_days" min="1" max="90" required></div>
+          </div>
+          <div class="two">
+            <div class="field"><label>المكافأة المالية</label><input class="input" name="prize_amount" maxlength="40" required></div>
+            <div class="field"><label>عدد الفائزين (من أعضاء البرنامج)</label><input class="input" type="number" name="winners_count" min="1" max="20" required></div>
+          </div>
+          <div class="field"><label>جائزة إضافية</label><input class="input" name="prize_extra" maxlength="120" required></div>
+          <div class="field"><label>نص «لمن تُمنح الجوائز»</label><textarea class="textarea" name="prize_scope_text" rows="2" maxlength="300" style="min-height:70px"></textarea></div>
+          <label class="switch"><input type="checkbox" name="registration_open"> التسجيل مفتوح للمشاركين الجدد</label>
+          <button class="btn" type="submit">حفظ الإعدادات</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:24px;max-width:720px;margin-top:18px">
+        <div class="colh"><span>💾 نسخة احتياطية</span></div>
+        <p class="hintp">ينزّل ملف JSON فيه الإعدادات والمشاركون والإنجازات والأكواد. احتفظ به في مكان آمن (يحتوي أكواد العضوية).</p>
+        <button class="btn ghost" id="backup">⬇ تنزيل نسخة احتياطية</button>
+      </div>
+
+      <div class="card" style="padding:24px;max-width:720px;margin-top:18px">
+        <div class="colh"><span>🔑 تغيير كلمة المرور</span></div>
+        <form class="form" id="pwForm">
+          <div class="two">
+            <div class="field"><label>كلمة المرور الجديدة (10 أحرف على الأقل)</label><input class="input" name="p1" type="password" dir="ltr" minlength="10" autocomplete="new-password" required></div>
+            <div class="field"><label>تأكيد كلمة المرور</label><input class="input" name="p2" type="password" dir="ltr" minlength="10" autocomplete="new-password" required></div>
+          </div>
+          <button class="btn" type="submit">تغيير كلمة المرور</button>
+        </form>
+      </div>
+
+      <div class="card" style="padding:24px;max-width:720px;margin-top:18px;border:1.5px solid #f3b4b6">
+        <div class="colh"><span>⚠️ منطقة الخطر</span></div>
+        <p class="hintp">إجراءات لا يمكن التراجع عنها. نزّل نسخة احتياطية أولًا.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn danger sm" id="dzRejected">حذف المشاركين المرفوضين</button>
+          <button class="btn danger sm" id="dzSubs">تصفير كل الإنجازات (جولة جديدة)</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script>window.supabase||document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"><\/script>')</script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
